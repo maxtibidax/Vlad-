@@ -1,11 +1,12 @@
 
 import React from 'react';
 
-interface NumberButtonProps {
-    number: number;
+interface ItemButtonProps {
+    item: number | string;
     onClick: () => void;
     isCorrect: boolean;
     isWrong: boolean;
+    index: number;
 }
 
 const colors = [
@@ -14,8 +15,8 @@ const colors = [
     'bg-indigo-400', 'bg-teal-400', 'bg-orange-400'
 ];
 
-const NumberButton: React.FC<NumberButtonProps> = ({ number, onClick, isCorrect, isWrong }) => {
-    const baseColor = colors[number - 1];
+const ItemButton: React.FC<ItemButtonProps> = ({ item, onClick, isCorrect, isWrong, index }) => {
+    const baseColor = colors[index % colors.length];
     
     const animationClass = isWrong ? 'animate-shake' : '';
     
@@ -42,7 +43,7 @@ const NumberButton: React.FC<NumberButtonProps> = ({ number, onClick, isCorrect,
                 animation: isWrong ? 'shake 0.5s' : (isCorrect ? 'tada 1s' : 'none')
             }}
         >
-            {number}
+            {item}
             <style>
             {`
                 @keyframes shake {
@@ -63,4 +64,4 @@ const NumberButton: React.FC<NumberButtonProps> = ({ number, onClick, isCorrect,
     );
 };
 
-export default NumberButton;
+export default ItemButton;
